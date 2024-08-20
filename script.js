@@ -1,9 +1,15 @@
+let userscore = 0;
+let computerscore = 0;
 let boxes = document.querySelectorAll(".box");
 let resetBtn = document.querySelector("#reset-btn");
 let newGameBtn = document.querySelector("#new-btn");
 let msgContainer = document.querySelector(".msg-container");
 let msg = document.querySelector("#msg");
+const uscorepera = document.querySelector("#user-score");
+const comscorepera = document.querySelector("#comp-score");
+
 let turnO = true;
+
 const winPatterns = [
   [0, 1, 2],
   [0, 3, 6],
@@ -24,12 +30,12 @@ boxes.forEach((box) => {
   box.addEventListener("click", () => {
     if (turnO) {
       box.innerText = "O";
-    box.style.color = "black";
+      box.style.color = "black";
 
       turnO = false;
     } else {
       box.innerText = "X";
-    box.style.color = "red";
+      box.style.color = "red";
 
       turnO = true;
     }
@@ -51,6 +57,13 @@ const enableBoxes = () => {
 };
 
 const showWinner = (winner) => {
+  if (turnO) {
+    userscore++;
+    uscorepera.innerText = userscore;
+  } else {
+    computerscore++;
+    comscorepera.innerText = computerscore;
+  }
   msg.innerText = `Congratulations, Winner is ${winner}`;
   msgContainer.classList.remove("hide");
   disableBoxes();
